@@ -1,44 +1,45 @@
 ```mermaid 
 erDiagram
     Peminjam{
-        int Id
+        int Id PK
         string name
         date ttgl
         string addres
     }
 
     Transaksi{
-        int Id_peminjman
-        date tgl_Pinjaman
-        int id_buku
-        int id_petugas
+        int Id PK
+        date tgl_Pinjaman 
+        int Id_peminjman FK
+        int id_buku Fk
+        int id_petugas Fk
     }
 
     Petugas{
-        int Id
+        int Id PK
         string status
         date ttgl
         string name
         string addres
-        int Id_Transaksi
-        int Id_Rak_Buku
+        int Id_Transaksi Fk
+        int Id_Rak_Buku Fk
     }
 
     Rak_Buku{
-        int Id
+        int Id PK
         string nama_rak
-        int Id_Petugas
-        int Id_Kategori
+        int Id_Petugas Fk
+        int Id_Kategori Fk
     }
 
     Kategori{
-        int Id
+        int Id PK
         string nama_Kategori_buku
-        int Id_Buku
+        int Id_Buku Fk
     }
 
     Buku{
-        int Id
+        int Id PK
         string nama_buku
         string judul_buku
         string author_buku
