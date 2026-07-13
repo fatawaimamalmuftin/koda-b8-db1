@@ -46,16 +46,16 @@ erDiagram
         int rate_buku
     }
 
-    Transaksi ||--o{ Peminjam : Transasi_Pinjaman
+    Peminjam ||--o{ Transaksi : Transasi_Pinjaman
 
-    Transaksi ||--o{ Buku : Info_buku
+    Buku ||--o{ Transaksi : Info_buku
 
-    Transaksi ||--o{ Petugas : Penanggung_jawab
+    Petugas ||--o{ Transaksi : Penanggung_jawab
 
     Kategori ||--o{ Buku : Kategori_buku
 
-    Rak_Buku ||--o{ Kategori : Kategori_Rak
+    Rak_Buku ||--|| Kategori : Rak_Kategori
 
-    Petugas ||--|{ Rak_Buku : Petugas_Rak
+    Rak_Buku ||--|{ Petugas : Petugas_Rak
 
 ```
