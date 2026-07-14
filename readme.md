@@ -1,62 +1,73 @@
-```mermaid 
+```mermaid
 erDiagram
-    Peminjam{
-        int Id PK
-        string name
-        date ttgl
+
+    roles {
+        int id_role PK
+        string role_name
+    }
+
+    users {
+        int id_user PK
+        string user_name
+        date birth_date
         string addres
+        int id_role FK
     }
 
-    Transaksi{
-        int Id PK
-        date tgl_Pinjaman 
-        int Id_peminjman FK
-        int id_buku Fk
-        int id_petugas Fk
+    book_shelf {
+        int id_shelf PK
+        string shelf_name
     }
 
-    Petugas{
-        int Id PK
-        string status
-        date ttgl
+    officer {
+        int id_officer PK
         string name
+        date birth_date
+        string nik
         string addres
-        int Id_Transaksi Fk
-        int Id_Rak_Buku Fk
+        int id_role FK
+        int id_shelf FK
     }
 
-    Rak_Buku{
-        int Id PK
-        string nama_rak
-        int Id_Petugas Fk
-        int Id_Kategori Fk
+    category {
+        int id_category PK
+        string category
+        int id_shelf FK
     }
 
-    Kategori{
-        int Id PK
-        string nama_Kategori_buku
-        int Id_Buku Fk
+    book {
+        int id_book PK
+        string book_title
+        string author_name
+        date date_of_issue
+        int id_shelf FK
+        int id_category FK
     }
 
-    Buku{
-        int Id PK
-        string nama_buku
-        string judul_buku
-        string author_buku
-        date tgl_terbit
-        int rate_buku
+    transactions {
+        int id_transaction PK
+        datetime borrow_date
+        date borrow_return
+        int id_user FK
+        int id_book FK
+        int id_officer FK
     }
 
-    Peminjam ||--o{ Transaksi : Transasi_Pinjaman
+    roles ||--o{ users : has
 
-    Buku ||--o{ Transaksi : Info_buku
+    roles ||--o{ officer : has
 
-    Petugas ||--o{ Transaksi : Penanggung_jawab
+    book_shelf ||--o{ officer : assigned
 
-    Kategori ||--o{ Buku : Kategori_buku
+    book_shelf ||--o{ category : contains
 
-    Rak_Buku ||--|| Kategori : Rak_Kategori
+    book_shelf ||--o{ book : stores
 
-    Rak_Buku ||--|{ Petugas : Petugas_Rak
+    category ||--o{ book : classifies
 
+    users ||--o{ transactions : borrows
+
+    officer ||--o{ transactions : handles
+
+    book ||--o{ transactions : borrowed
 ```
